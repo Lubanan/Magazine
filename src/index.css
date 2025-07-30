@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Keyframe animation for shifting background */
+@keyframes softGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animated pastel background */
+body {
+  background: linear-gradient(-45deg, #a7c7e7, #f7c6c7, #c9e4c5, #ffdfd3, #e0bbec);
+  background-size: 400% 400%;
+  animation: softGradientShift 15s ease infinite;
+  @apply text-gray-800;
+}
