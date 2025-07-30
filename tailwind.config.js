@@ -1,29 +1,19 @@
 /** @type {import('tailwindcss').Config} */
+import lineClamp from '@tailwindcss/line-clamp';
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-
-module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  theme: {
     extend: {
-      animation: {
-        fadeInUp: "fadeInUp 0.8s ease forwards",
-      },
-      keyframes: {
-        fadeInUp: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
+      colors: {
+        pastelBlue: '#A7C7E7',
+        pastelPink: '#F7C6C7',
+        pastelGreen: '#C9E4C5',
       },
     },
   },
-  plugins: [],
-}
+  plugins: [lineClamp],
+};
