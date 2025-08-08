@@ -1,18 +1,29 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import MagazineView from "./pages/MagazineView";
-import AdminPanel from "./pages/AdminPanel";
-import AdminLogin from "./pages/AdminLogin";
+import HorizontalScrollCarousel from "./components/HorizontalScrollCarousel";
+import Footer from "./components/Footer";
+import AdminLogin from  "./pages/AdminLogin";
+import { SmoothScrollHero } from "./components/SmoothScrollHero";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/magazine" element={<MagazineView />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/*"
+          element={
+            <>
+              <SmoothScrollHero />
+              <HorizontalScrollCarousel />
+              <Footer />
+
+          
+
+          
+            </>
+          }
+        />
       </Routes>
     </Router>
   );
