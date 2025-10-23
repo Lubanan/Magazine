@@ -1,108 +1,73 @@
-import React, { useEffect, useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+// src/components/Footer.js
+import React from "react";
 
-export default function Footer() {
-  const container = useRef(null);
-  const paths = useRef([]);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start end", "end end"],
-  });
-
-  useEffect(() => {
-    return scrollYProgress.on("change", (progress) => {
-      paths.current.forEach((path, i) => {
-        if (path) {
-          const offset = -40 + i * 40 + progress * 40;
-          path.setAttribute("startOffset", `${offset}%`);
-        }
-      });
-    });
-  }, [scrollYProgress]);
-
-  return (
-    <section className="relative">
-      {/* Subtle top fade to blend footer into section above */}
-      <div className="absolute -top-10 left-0 right-0 h-10 bg-gradient-to-b from-transparent to-indigo-500/30 z-0 pointer-events-none" />
-
-      {/* Footer container with bright purple-indigo gradient background */}
-      <div
-        ref={container}
-        className="relative text-white py-10 z-10"
-        style={{
-          background: `linear-gradient(
-            to bottom,
-            #845ec2,  /* vibrant purple */
-            #4C1D95,  /* rich purple */
-            #6C63FF,  /* bright indigo */
-            #8A7BFF   /* soft lavender */
-          )`,
-        }}
-      >
-        <svg
-          className="w-full"
-          viewBox="0 0 250 90"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" stopColor="#f5f3ff" />   {/* very pale lavender, almost white */}
-<stop offset="50%" stopColor="#eae6ff" />  {/* soft lavender white */}
-<stop offset="100%" stopColor="#f0eaff" /> {/* faint lavender white */}
-
-
-            </linearGradient>
-          </defs>
-          <path
-            fill="none"
-            id="curve"
-            d="M0,88.5 C61.37,88.5 61.5,20.5 126.5,20.5 C184.5,20.5 177.5,88.5 250,88.5"
-          />
-          <text
-            className="uppercase font-bold tracking-widest"
-            style={{ fill: "url(#gradient)", fontSize: "5px" }}
-          >
-            {[...Array(3)].map((_, i) => (
-              <textPath
-                key={i}
-                ref={(el) => (paths.current[i] = el)}
-                startOffset={`${i * 40}%`}
-                href="#curve"
-              >
-                Step Into the World of Vibe Club&nbsp;&nbsp;&nbsp;
-              </textPath>
-            ))}
-          </text>
+const Footer = () => {
+  const socialLinks = [
+    {
+      name: "Facebook",
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
         </svg>
-
-        {/* Logos component */}
-        <Logos scrollProgress={scrollYProgress} />
-      </div>
-    </section>
-  );
-}
-
-const Logos = ({ scrollProgress }) => {
-  const y = useTransform(scrollProgress, [0, 1.4], [-800, 0]);
+      )
+    },
+  ];
 
   return (
-    <motion.div
-      style={{ y }}
-      className="h-[420px] overflow-hidden bg-transparent flex justify-center items-center"
-    >
-      <img
-        src="https://scontent.fcgy1-1.fna.fbcdn.net/v/t39.30808-6/387774648_122129311970025539_8928505656887210484_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ptN9J1L23zcQ7kNvwHmwDmp&_nc_oc=AdlgsPpdLT5a7QqF74gGBlDLpwj2YwLsMNpKSQDGJmWdODQK4aNDhPfdCalYH3L-nJ9ifodU7F_iCMkq3RKqkxQ9&_nc_zt=23&_nc_ht=scontent.fcgy1-1.fna&_nc_gid=bnlx-uETVfwB_VRD6D1MOg&oh=00_AfQ4tpU1YogrXX1RKzmmH9oHzlYvMd3jorb9BWrHUyJKfw&oe=689420E8"
-        alt="Logo"
-        className="h-96 w-96 rounded-full object-cover"
-        style={{
-          boxShadow: `
-            0 10px 20px rgba(0, 0, 0, 0.3),
-            0 0 25px rgba(132, 94, 194, 0.5),
-            0 0 50px rgba(132, 94, 194, 0.3)
-          `,
-        }}
-      />
-    </motion.div>
+    <footer className="bg-gradient-to-r from-[#241536] via-[#1b0b28] to-[#0f0f23] border-t border-purple-500/30">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+
+          {/* University Information */}
+          <div className="flex items-center space-x-4">
+            {/* UIC Logo */}
+            <div className="w-16 h-16 flex-shrink-0 rounded-full border-2 border-purple-400/50 overflow-hidden bg-white/10 shadow-lg">
+              <img
+                src="https://raw.githubusercontent.com/NotJayDee119/pic/refs/heads/main/uic-logo2-(1).png"
+                alt="University of the Immaculate Conception Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Text Information */}
+            <div className="text-center md:text-left">
+              <h3 className="text-white font-semibold text-sm mb-1">
+                University of the Immaculate Conception
+              </h3>
+              <p className="text-gray-400 text-sm mb-2">
+                Department of Digital Innovation
+              </p>
+              <p className="text-gray-500 text-xs">
+                © {new Date().getFullYear()} All Rights Reserved
+              </p>
+            </div>
+          </div>
+
+          {/* Social Media */}
+          <div className="flex flex-col items-center md:items-end">
+            <p className="text-gray-400 text-sm mb-3 font-medium">Connect With Us</p>
+            <div className="flex space-x-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.name === "Facebook" ? "https://www.facebook.com/uicvibe" : "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-purple-900/30 hover:bg-purple-700/50 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-purple-500/25"
+                  aria-label={`Follow us on ${social.name}`}
+                  title={social.name}
+                >
+                  <div className="w-5 h-5">
+                    {social.icon}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
+
+export default Footer;
